@@ -1168,7 +1168,7 @@ class Router {
         // back from external site
         this.isSsr = true;
         this.isFallback = isFallback;
-        this.isReady = !!(self.__NEXT_DATA__.gssp || self.__NEXT_DATA__.gip || self.__NEXT_DATA__.appGip && !self.__NEXT_DATA__.gsp || !autoExportDynamic && !self.location.search && !false);
+        this.isReady = !!(self.__NEXT_DATA__.gssp || self.__NEXT_DATA__.gip || self.__NEXT_DATA__.appGip && !self.__NEXT_DATA__.gsp || !autoExportDynamic && !self.location.search && !true);
         this.isPreview = !!isPreview;
         this.isLocaleDomain = false;
         if (false) {}
@@ -1282,7 +1282,18 @@ class Router {
         pathname = pathname ? (0, _normalizeTrailingSlash).removePathTrailingSlash(delBasePath(pathname)) : pathname;
         if (shouldResolveHref && pathname !== '/_error') {
             options._shouldResolveHref = true;
-            if (false) {} else {
+            if ( true && as.startsWith('/')) {
+                const rewritesResult = (0, _resolveRewrites).default(addBasePath(addLocale(cleanedAs, this.locale)), pages, rewrites, query, (p)=>resolveDynamicRoute(p, pages)
+                , this.locales);
+                resolvedAs = rewritesResult.asPath;
+                if (rewritesResult.matchedPage && rewritesResult.resolvedHref) {
+                    // if this directly matches a page we need to update the href to
+                    // allow the correct page chunk to be loaded
+                    pathname = rewritesResult.resolvedHref;
+                    parsed.pathname = addBasePath(pathname);
+                    url = (0, _utils).formatWithValidation(parsed);
+                }
+            } else {
                 parsed.pathname = resolveDynamicRoute(pathname, pages);
                 if (parsed.pathname !== pathname) {
                     pathname = parsed.pathname;
@@ -1611,7 +1622,20 @@ class Router {
         if (false) {}
         const pages = await this.pageLoader.getPageList();
         let resolvedAs = asPath;
-        if (false) {} else {
+        if ( true && asPath.startsWith('/')) {
+            let rewrites;
+            ({ __rewrites: rewrites  } = await (0, _routeLoader).getClientBuildManifest());
+            const rewritesResult = (0, _resolveRewrites).default(addBasePath(addLocale(asPath, this.locale)), pages, rewrites, parsed.query, (p)=>resolveDynamicRoute(p, pages)
+            , this.locales);
+            resolvedAs = delLocale(delBasePath(rewritesResult.asPath), this.locale);
+            if (rewritesResult.matchedPage && rewritesResult.resolvedHref) {
+                // if this directly matches a page we need to update the href to
+                // allow the correct page chunk to be loaded
+                pathname = rewritesResult.resolvedHref;
+                parsed.pathname = pathname;
+                url = (0, _utils).formatWithValidation(parsed);
+            }
+        } else {
             parsed.pathname = resolveDynamicRoute(parsed.pathname, pages);
             if (parsed.pathname !== pathname) {
                 pathname = parsed.pathname;

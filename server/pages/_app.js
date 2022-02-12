@@ -82,7 +82,7 @@ function LayOut({ children  }) {
 
 function App({ Component , pageProps  }) {
     return(/*#__PURE__*/ jsx_runtime_.jsx(LayOut, {
-        children: /*#__PURE__*/ jsx_runtime_.jsx(Component, {
+        /*#__PURE__*/ children: /*#__PURE__*/ jsx_runtime_.jsx(Component, {
             ...pageProps
         })
     }));
