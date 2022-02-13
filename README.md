@@ -30,6 +30,8 @@ create react-app을 통해 생성된 프로젝트에서는 React router DOM을 D
    1. 페이지를 렌더링 할 때마다 호출 된다.
    2. 필수는 아니지만 템플릿을 커스텀하기 위해서는 작성해야 한다.
 5. 커스텀 App 이외의 파일들로부터는 임포트를 할 수 없다.
+6. Dynamic URL 생성하는 방법
+   1. /pages/[PARAMETER_ID].js 로 선언하면 된다.
 
 ###Framework와 Library의 차이
 Library는 내가 호출하는 거, Framework는 Framework가 나의 코드를 호출 하는거.
