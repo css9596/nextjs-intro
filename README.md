@@ -23,9 +23,9 @@ create react-app을 통해 생성된 프로젝트에서는 React router DOM을 D
    2. 이를 통해서 className의 충돌을 막아준다.
 3. Styled JSX
    1. 컴포넌트 별 독립적으로 Style을 적용 시킬 수가 있다.
-   2. <style jsx>{[``]}</style> 으로 구성하여 사용하면 된다.
+   2. \<style jsx>{`  `}\</style> 으로 구성하여 사용하면 된다.
    3. global 옵션으로 전체 적용을 할 수 있다.
-      1. <style jsx global></style>
+      1. \<style jsx global>\</style>
 4. Custom App Component
    1. 페이지를 렌더링 할 때마다 호출 된다.
    2. 필수는 아니지만 템플릿을 커스텀하기 위해서는 작성해야 한다.
@@ -36,4 +36,9 @@ Library는 내가 호출하는 거, Framework는 Framework가 나의 코드를 �
 Ex) pages/FILE_NAME으로 파일을 생성하면 URL에 ~/FILE_NAME으로 호출하면 알아서 결과를 찾아준다.
     이로 Router/Render 처리를 안하고도 페이지 이동을 기대할 수 있다.
 
-###
+###Server Side Rendering
+react로 개발을 진행 할 떄 클라이언트에서 실행하는 것이 아닌 서버에서 실행하고 싶을 때 사용한다.
+####export async function getServerSideProps(){}
+getServerSideProps의 이름은 변경해서는 안된다.
+이후 getServerSideProps function 안에 서버에서 동작할 로직을 넣어 주고
+메인 Component 에서 인자값으로 데이터를 받아서 처리 하면 된다.
